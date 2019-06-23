@@ -1,28 +1,32 @@
 <?php
-
-
 main::start();
 
 class main
 {
     static public function start()
     {
+        $test = 'test';
+
         $records = csv::getrecords();
         $table = html::generateTable($records);
         system::printPage($table);
     }
 }
 
-
 class csv
 {
-    static public function getRecords() {}
+    static public function getRecords()
+    {
+        $records[] = $test;
+
+        return $records;
+    }
 }
 class html
 {
     static public function generateTable($records)
     {
-        $table = 'test';
+        $table = $records;
         return $table;
     }
 }
