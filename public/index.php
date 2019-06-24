@@ -1,4 +1,11 @@
 <?php
+
+$file = fopen("example.csv","r");
+print_r(fgetcsv($file));
+fclose($file);
+
+
+/*
 main::start();
 
 class main
@@ -37,4 +44,5 @@ class system
         echo $page;
     }
 }
+*/
 ?>
