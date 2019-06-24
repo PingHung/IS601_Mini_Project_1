@@ -10,6 +10,13 @@ class main {
         $records = csv::getRecords($filename);
 
 
+        foreach ($records as $record){
+            $array = $record->returnArray();
+            print_r($array);
+
+        }
+
+
     }
 }
 
@@ -39,13 +46,15 @@ class record {
 
     public function __construct(Array $fieldNames = null, $values = null)
     {
-        print_r($fieldNames);
-        print_r($values);
-
         $record = array_combine($fieldNames, $values);
-        print_r($record);
-        $this->createProperty();
+        foreach ($record as $property => $value){
+            $this->createProperty($property, $value);
+        }
 
+    }
+    public function returnArray(){
+        $array = (array) $this;
+        return $array;
     }
 
     public function createProperty($name = 'first', $value = 'keith'){
