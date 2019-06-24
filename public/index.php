@@ -1,8 +1,23 @@
 <?php
 
-$file = fopen("example.csv","r");
+/*$file = fopen("example.csv","r");
 print_r(fgetcsv($file));
-fclose($file);
+fclose($file);*/
+main::start();
+
+class main {
+    static public function star(){
+        $file = fopen("example.csv", "r");
+        while(! feof($file))
+        {
+            $record = fgetcsv($file);
+            $records[] = $record;
+        }
+
+        fclose($file);
+        print_r($records);
+    }
+}
 
 
 /*
