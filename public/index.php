@@ -3,11 +3,19 @@
 /*$file = fopen("example.csv","r");
 print_r(fgetcsv($file));
 fclose($file);*/
-main::start();
+main::start("example.csv");
 
 class main {
-    static public function star(){
-        $file = fopen("example.csv", "r");
+    static public function star($filename){
+
+        $records = csv::getRecords($filename);
+        print_r($records);
+    }
+}
+
+class csv {
+    static public function getRecords($filename){
+        $file = fopen($filename, "r");
         while(! feof($file))
         {
             $record = fgetcsv($file);
@@ -15,10 +23,9 @@ class main {
         }
 
         fclose($file);
-        print_r($records);
+        return $records;
     }
 }
-
 
 /*
 main::start();
