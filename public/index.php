@@ -42,6 +42,8 @@ class record {
         print_r($fieldNames);
         print_r($values);
 
+        $record = array_combine($fieldNames, $values);
+        print_r($record);
         $this->createProperty();
 
     }
