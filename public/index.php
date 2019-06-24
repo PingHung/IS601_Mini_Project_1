@@ -1,22 +1,33 @@
 <?php
 
-/*$file = fopen("example.csv","r");
-print_r(fgetcsv($file));
-fclose($file);*/
 main::start("example.csv");
 
 class main {
     static public function start($filename){
         $records = csv::getRecords($filename);
+        $table = html::generateTable($records);
 
-
-        foreach ($records as $record){
+        /*foreach ($records as $record){
             $array = $record->returnArray();
-            print_r($array);
+            print_r($array);*/
 
         }
 
 
+    }
+}
+
+
+
+class html {
+    public static function generateTable($records)
+    {
+
+
+        foreach ($records as $record) {
+            $array = $record->returnArray();
+            print_r($array);
+        }
     }
 }
 
@@ -71,6 +82,7 @@ class recordFactory {
     }
 
 }
+
 /*
 main::start();
 
@@ -111,4 +123,5 @@ class system
     }
 }
 */
+
 ?>
