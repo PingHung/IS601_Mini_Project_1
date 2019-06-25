@@ -38,9 +38,7 @@ class html {
                 $fields = array_keys($array);
                 $values = array_values($array);
 
-                foreach ($fields as $field) {
-                    $page .= "<th>" . $field . "</th>";
-                }
+                $page .= html::generateHeading($fields);
 
                 $page .= "</tr><tbody><tr>";
 
@@ -71,6 +69,13 @@ class html {
 
 
         $page .= "</tbody></table></div>";
+        return $page;
+    }
+
+    static public function generateHeading($fields){
+        foreach ($fields as $field) {
+            $page .= "<th>" . $field . "</th>";
+        }
         return $page;
     }
 }
