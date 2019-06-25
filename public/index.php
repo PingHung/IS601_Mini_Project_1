@@ -18,9 +18,7 @@ class main {
     {
         $records = csv::getRecords($filename);
         $page = html::generateTable($records);
-
         system::printPage($page);
-
     }
 }
 
@@ -39,38 +37,45 @@ class html {
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
-                //print_r($fields);
-                //print_r($values);
-
 
                 foreach ($fields as $field) {
                     $page .= "<th>" . $field . "</th>";
                 }
 
+                $page .= "</tr><tbody><tr>";
 
+                foreach ($values as $value) {
+                    $page .= "<td>" . $value . "</td>";
+                }
 
+                $page .= "</tr>";
 
             }
             else{
                 $array = $record->returnArray();
                 $values = array_values($array);
-                //print_r($values);
+
+                $page .= "<tr>";
+                foreach ($values as $value) {
+                    $page .= "<td>" . $value . "</td>";
+                }
+
+                $page .= "</tr>";
+
 
             }
+
             $count++;
-            
         }
-        
-        $page .= "</tr></thread></table></div>";
 
-        
 
+
+        $page .= "</tbody></table></div>";
         return $page;
     }
 }
 
 class csv {
-
     static public function getRecords($filename){
         $file = fopen($filename, "r");
         $fieldNames = array();
@@ -92,20 +97,17 @@ class csv {
 }
 
 class record {
-
     public function __construct(Array $fieldNames = null, $values = null)
     {
         $record = array_combine($fieldNames, $values);
         foreach ($record as $property => $value){
             $this->createProperty($property, $value);
         }
-
     }
     public function returnArray(){
         $array = (array) $this;
         return $array;
     }
-
     public function createProperty($name = null, $value = null){
         $this->{$name} = $value;
     }
@@ -113,12 +115,9 @@ class record {
 
 class recordFactory {
     static public function create(Array $fieldNames = null, Array $values = null) {
-
         $record = new record($fieldNames, $values);
-
         return $record;
     }
-
 }
 
 class system
