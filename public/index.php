@@ -7,6 +7,7 @@ class main {
     {
         $records = csv::getRecords($filename);
         $table = html::generateTable($records);
+        system::printPage($table);
 
     }
 }
@@ -15,8 +16,9 @@ class main {
 class html {
     static public function generateTable($records)
     {
-        $count = 0;
 
+
+        $count = 0;
         foreach ($records as $record) {
 
             if($count == 0){
@@ -24,15 +26,15 @@ class html {
                 $array = $record->returnArray();
                 $fields = array_keys($array);
                 $values = array_values($array);
-                print_r($fields);
-                print_r($values);
+                //print_r($fields);
+                //print_r($values);
+
 
             }
             else{
                 $array = $record->returnArray();
-
                 $values = array_values($array);
-                print_r($values);
+                //print_r($values);
 
             }
             $count++;
@@ -90,6 +92,14 @@ class recordFactory {
         return $record;
     }
 
+}
+
+class system
+{
+    static public function printPage($page)
+    {
+        echo $page;
+    }
 }
 
 /*
