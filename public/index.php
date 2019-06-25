@@ -17,9 +17,9 @@ class main {
     static public function start($filename)
     {
         $records = csv::getRecords($filename);
-        $table = html::generateTable($records);
-        //echo $page;
-        #system::printPage($table);
+        $page = html::generateTable($records);
+
+        system::printPage($page);
 
     }
 }
@@ -63,9 +63,9 @@ class html {
         
         $page .= "</tr></thread></table></div>";
 
-        echo $page;
+        
 
-        return $table;
+        return $page;
     }
 }
 
@@ -123,7 +123,7 @@ class recordFactory {
 
 class system
 {
-    static public function printPage($table)
+    static public function printPage($page)
     {
         echo $page;
     }
