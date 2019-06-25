@@ -39,13 +39,8 @@ class html {
                 $values = array_values($array);
 
                 $page .= html::generateHeading($fields);
-
                 $page .= "</tr><tbody><tr>";
-
-                foreach ($values as $value) {
-                    $page .= "<td>" . $value . "</td>";
-                }
-
+                $page .= html::generateValues($values);
                 $page .= "</tr>";
 
             }
@@ -53,11 +48,9 @@ class html {
                 $array = $record->returnArray();
                 $values = array_values($array);
 
-                $page .= "<tr>";
-                foreach ($values as $value) {
-                    $page .= "<td>" . $value . "</td>";
-                }
 
+                $page .= "<tr>";
+                $page .= html::generateValues($values);
                 $page .= "</tr>";
 
 
@@ -78,6 +71,14 @@ class html {
         }
         return $page;
     }
+
+    static public function generateValues($values){
+        foreach ($values as $value) {
+            $page .= "<td>" . $value . "</td>";
+        }
+        return $page;
+    }
+
 }
 
 class csv {
