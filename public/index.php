@@ -1,3 +1,15 @@
+<html>
+<head>
+    <title>IS601 Mini Project 1</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<h1>
+    Ping Hung Ho IS601 Mini Project 1
+</h1>
+</body>
+</html>
+
 <?php
 
 main::start("example.csv");
