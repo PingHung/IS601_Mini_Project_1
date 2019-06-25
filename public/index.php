@@ -1,14 +1,3 @@
-<html>
-<head>
-    <title>IS601 Mini Project 1</title>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-<h1>
-    Ping Hung Ho IS601 Mini Project 1
-</h1>
-
 <?php
 
 main::start("example.csv");
@@ -17,17 +6,44 @@ class main {
     static public function start($filename)
     {
         $records = csv::getRecords($filename);
-        $page = html::generateTable($records);
+        $page = html::generatePage($records);
+
         system::printPage($page);
     }
 }
 
 
 class html {
+    static public function generatePage($records){
+
+        $page = "
+<html>
+<head>
+    <title>IS601 Mini Project 1</title>
+    <meta charset=\"utf-8\"/>
+    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
+</head>
+<body>
+<h1>
+    Ping Hung Ho IS601 Mini Project 1
+</h1>
+";
+
+        $page .= html::generateTable($records);
+
+        $page .= "        
+</body>
+</html>";
+
+        return $page;
+    }
+
     static public function generateTable($records)
     {
-        $page = "<div class=\"container\"><table class=\"table table-bordered\"><thread><tr>";
-
+        $page .= "<div class=\"container\">
+<table class=\"table table-bordered\">
+<thead>
+";
 
         $count = 0;
         foreach ($records as $record) {
@@ -39,43 +55,51 @@ class html {
                 $values = array_values($array);
 
                 $page .= html::generateHeading($fields);
-                $page .= "</tr><tbody><tr>";
+                $page .= "</thead>
+<tbody>
+";
                 $page .= html::generateValues($values);
-                $page .= "</tr>";
+
 
             }
             else{
                 $array = $record->returnArray();
                 $values = array_values($array);
 
-
-                $page .= "<tr>";
                 $page .= html::generateValues($values);
-                $page .= "</tr>";
-
 
             }
 
             $count++;
         }
 
-
-
-        $page .= "</tbody></table></div>";
+        $page .= "</tbody>
+</table>
+</div>";
         return $page;
     }
 
     static public function generateHeading($fields){
+        $page .= "<tr>
+";
         foreach ($fields as $field) {
-            $page .= "<th>" . $field . "</th>";
+            $page .= "<th>" . $field . "</th>
+";
         }
+        $page .= "</tr>
+";
         return $page;
     }
 
     static public function generateValues($values){
+        $page .= "<tr>
+";
         foreach ($values as $value) {
-            $page .= "<td>" . $value . "</td>";
+            $page .= "<td>" . $value . "</td>
+";
         }
+        $page .= "</tr>
+";
         return $page;
     }
 
@@ -135,6 +159,3 @@ class system
 }
 
 ?>
-
-</body>
-</html>
