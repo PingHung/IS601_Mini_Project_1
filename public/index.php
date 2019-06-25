@@ -2,13 +2,12 @@
 <head>
     <title>IS601 Mini Project 1</title>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <h1>
     Ping Hung Ho IS601 Mini Project 1
 </h1>
-</body>
-</html>
 
 <?php
 
@@ -19,7 +18,8 @@ class main {
     {
         $records = csv::getRecords($filename);
         $table = html::generateTable($records);
-        system::printPage($table);
+        //echo $page;
+        #system::printPage($table);
 
     }
 }
@@ -28,6 +28,7 @@ class main {
 class html {
     static public function generateTable($records)
     {
+        $page = "<div class=\"container\"><table class=\"table table-bordered\"><thread><tr>";
 
 
         $count = 0;
@@ -42,6 +43,13 @@ class html {
                 //print_r($values);
 
 
+                foreach ($fields as $field) {
+                    $page .= "<th>" . $field . "</th>";
+                }
+
+
+
+
             }
             else{
                 $array = $record->returnArray();
@@ -50,7 +58,14 @@ class html {
 
             }
             $count++;
+            
         }
+        
+        $page .= "</tr></thread></table></div>";
+
+        echo $page;
+
+        return $table;
     }
 }
 
@@ -108,10 +123,13 @@ class recordFactory {
 
 class system
 {
-    static public function printPage($page)
+    static public function printPage($table)
     {
         echo $page;
     }
 }
 
 ?>
+
+</body>
+</html>
